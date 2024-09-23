@@ -1,2 +1,25 @@
 i am shaik nadeem 
 i am from gulbarga 
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an IAM User with S3 List Permissions
+
+Resources:
+  MyIAMUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: my-iam-naddy123
+
+  MyUserPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: MyS3ListPolicy
+      Users:
+        - !Ref MyIAMUser
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 's3:ListAllMyBuckets'
+              - 's3:ListBucket'
+            Resource: '*'
